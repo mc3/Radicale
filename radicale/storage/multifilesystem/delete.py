@@ -20,7 +20,7 @@ import os
 from tempfile import TemporaryDirectory
 from typing import Optional
 
-from radicale import pathutils, storage
+from radicale import pathutils, storage, config
 from radicale.storage.multifilesystem.base import CollectionBase
 from radicale.storage.multifilesystem.history import CollectionPartHistory
 
@@ -29,6 +29,8 @@ class CollectionPartDelete(CollectionPartHistory, CollectionBase):
 
     def delete(self, href: Optional[str] = None) -> None:
         if href is None:
+            if self.configuration.get("collections", "preserve"):
+                return
             # Delete the collection
             parent_dir = os.path.dirname(self._filesystem_path)
             try:

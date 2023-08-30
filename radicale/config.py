@@ -226,8 +226,12 @@ DEFAULT_CONFIG_SCHEMA: types.CONFIG_SCHEMA = OrderedDict([
             "help": "mask passwords in logs",
             "type": bool})])),
     ("headers", OrderedDict([
-        ("_allow_extra", str)]))])
-
+        ("_allow_extra", str)])),
+    ("collections", OrderedDict([
+        ("preserve", {
+            "value": "False",
+            "help": "do not allow deletion",
+            "type": bool})]))])
 
 def parse_compound_paths(*compound_paths: Optional[str]
                          ) -> List[Tuple[str, bool]]:
